@@ -18,6 +18,7 @@ const marketSchema = new Schema(
     category: {
       type: String,
     },
+    address: String,
     location: {
       type: {
         type: String,
