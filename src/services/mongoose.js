@@ -18,7 +18,7 @@ if (config.env === 'dev') {
 
 exports.connect = async () => {
   // eslint-disable-next-line no-constant-condition
-  const mongoURI = config.env === 'prod' || 'dev' ? config.mongo.uri : config.mongo.testURI
+  const mongoURI = config.env === 'prod' || config.env === 'dev' ? config.mongo.uri : config.mongo.testURI
 
   await mongoose.connect(mongoURI, {
     keepAlive: 1,

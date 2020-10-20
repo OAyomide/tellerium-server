@@ -15,6 +15,7 @@ const checkRequiredAdmin = async () => {
     email: ADMIN_EMAIL,
     name: 'Admin',
     password: ADMIN_PASSWORD,
+    role: 'admin'
   })
   await user.save()
 }

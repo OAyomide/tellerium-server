@@ -16,9 +16,9 @@ const { ADMIN } = require('../constants')
 
 router.post('/', auth([ADMIN]), create)
 
-router.get('/:id', auth(), get)
+router.get('/:id', get)
 
-router.get('/search/markets', auth(), searchByParams)
+router.get('/search/markets', searchByParams)
 
 router.put('/:id', [validateCreate, auth([ADMIN])], update)
 

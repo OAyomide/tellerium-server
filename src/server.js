@@ -18,6 +18,7 @@ module.exports = () => {
   app.use(passport.initialize())
   passport.use('jwt', passportJwt.jwt)
 
+  app.options(cors())
   app.use('/api', apiRouter)
   app.use(errorHandler.handleNotFound)
   app.use(errorHandler.handleError)

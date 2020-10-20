@@ -1,10 +1,14 @@
 const { CREATED } = require('http-status')
 const httpError = require('http-errors')
+const NodeGeocode = require('node-geocoder')
 const Market = require('../../models/market')
+const geocoder = NodeGeocode({ provider: 'openstreetmap' }) // because i dont have a google maps api key right now
 
 module.exports = async (req, res, next) => {
   try {
-    const { coordinates } = req.body
+    const geocode = await geocoder.geocode(req.body.address)
+    const { longitude, latitude } = geocode[0]
+    const coordinates = [longitude, latitude]
     const market = new Market({
       ...req.body,
       location: {
