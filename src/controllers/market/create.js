@@ -7,9 +7,10 @@ const geocoder = NodeGeocode({ provider: 'openstreetmap' }) // because i dont ha
 module.exports = async (req, res, next) => {
   try {
     const geocode = await geocoder.geocode(req.body.address)
-    if (geocode.length > 0) {
+
+    if (geocode.length === 0) {
       res.status(BAD_REQUEST)
-      next(httpError(400, 'Could not find coordinates for address after geocoding'))
+      next(httpError(BAD_REQUEST, 'Could not find coordinates for address'))
       return
     }
 
@@ -24,6 +25,6 @@ module.exports = async (req, res, next) => {
     const newMarket = await market.save()
     res.status(CREATED).json({ id: newMarket.id })
   } catch (error) {
-    next(httpError(400, error.message))
+    next(httpError(BAD_REQUEST, error.message))
   }
 }
